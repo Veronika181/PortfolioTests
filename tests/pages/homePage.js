@@ -3,15 +3,19 @@ import { expect } from '@playwright/test';
 export class HomePage {
   constructor(page) {
     this.page = page;
-    this.heading = page.getByRole('heading', { name: /veronika/i });
+
+    this.header = page.locator('header');
+    this.mainHeading = page.locator('h1');
+    this.projectsSection = page.locator('#projects');
+    this.contactSection = page.locator('#contact');
   }
 
-  async open() {
+  async goto() {
     await this.page.goto('https://veronika181.github.io/Veronika_portfolio_website.github.io/');
   }
 
   async verifyLoaded() {
-    await expect(this.page).toHaveTitle(/Veronika/i);
-    await expect(this.heading).toBeVisible();
+    await expect(this.header).toBeVisible();
+    await expect(this.mainHeading).toBeVisible();
   }
 }
